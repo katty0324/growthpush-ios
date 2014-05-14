@@ -10,6 +10,10 @@
 #import <objc/runtime.h>
 #import <GrowthPush/GrowthPush.h>
 
+@interface GPAppDelegateWrapper : UIResponder <UIApplicationDelegate>
+
+@end
+
 @protocol GPLaunchViaPushNotificationAppDelegateWrapperDelegate <NSObject>
 
 @optional
@@ -303,6 +307,14 @@
 
 @end
 
+@interface GPNothingToDoAppDelegateIntercepter : NSObject <GPLaunchViaPushNotificationAppDelegateWrapperDelegate>
+
+@end
+
+@implementation GPNothingToDoAppDelegateIntercepter
+
+@end
+
 @interface UIApplication ()
 
 - (void) setDelegateWithWrapping:(id<UIApplicationDelegate>)delegate;
@@ -329,8 +341,13 @@
     
     GPLaunchViaPushNotificationAppDelegateWrapper *appDelegateWrapper = [[GPLaunchViaPushNotificationAppDelegateWrapper alloc] init];
     [appDelegateWrapper setOriginalAppDelegate:delegate];
-    GPLaunchViaPushNotificationAppDelegateIntercepter *appDelegateIntercepter = [[GPLaunchViaPushNotificationAppDelegateIntercepter alloc] init];
-    [appDelegateWrapper setDelegate:appDelegateIntercepter];
+    
+    if([delegate class] == [GPAppDelegateWrapper class]) {
+        [appDelegateWrapper setDelegate:[[GPNothingToDoAppDelegateIntercepter alloc] init]];
+    }else{
+        [appDelegateWrapper setDelegate:[[GPLaunchViaPushNotificationAppDelegateIntercepter alloc] init]];
+    }
+    
     [self setDelegateWithWrapping:appDelegateWrapper];
     
 }
