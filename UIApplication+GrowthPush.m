@@ -10,7 +10,7 @@
 #import <objc/runtime.h>
 #import <GrowthPush/GrowthPush.h>
 
-@protocol GPLaunchViewPushNotificationAppDelegateWrapperDelegate <NSObject>
+@protocol GPLaunchViaPushNotificationAppDelegateWrapperDelegate <NSObject>
 
 @optional
 
@@ -37,19 +37,19 @@
 
 @end
 
-@interface GPLaunchViewPushNotificationAppDelegateWrapper : UIResponder <UIApplicationDelegate> {
+@interface GPLaunchViaPushNotificationAppDelegateWrapper : UIResponder <UIApplicationDelegate> {
     
-    id <GPLaunchViewPushNotificationAppDelegateWrapperDelegate> delegate;
+    id <GPLaunchViaPushNotificationAppDelegateWrapperDelegate> delegate;
     UIResponder <UIApplicationDelegate> *originalAppDelegate;
     
 }
 
-@property (nonatomic, assign) id <GPLaunchViewPushNotificationAppDelegateWrapperDelegate> delegate;
+@property (nonatomic, assign) id <GPLaunchViaPushNotificationAppDelegateWrapperDelegate> delegate;
 @property (nonatomic, retain) UIResponder <UIApplicationDelegate> *originalAppDelegate;
 
 @end
 
-@implementation GPLaunchViewPushNotificationAppDelegateWrapper
+@implementation GPLaunchViaPushNotificationAppDelegateWrapper
 
 @synthesize delegate;
 @synthesize originalAppDelegate;
@@ -260,11 +260,11 @@
 
 @end
 
-@interface GPLaunchViewPushNotificationAppDelegateIntercepter : NSObject <GPLaunchViewPushNotificationAppDelegateWrapperDelegate>
+@interface GPLaunchViaPushNotificationAppDelegateIntercepter : NSObject <GPLaunchViaPushNotificationAppDelegateWrapperDelegate>
 
 @end
 
-@implementation GPLaunchViewPushNotificationAppDelegateIntercepter
+@implementation GPLaunchViaPushNotificationAppDelegateIntercepter
 
 - (BOOL) didPerformApplication:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
@@ -323,13 +323,13 @@
 
 - (void) setDelegateWithWrappingImplementation:(id<UIApplicationDelegate>)delegate {
     
-    if ([delegate class] == [GPLaunchViewPushNotificationAppDelegateWrapper class]) {
+    if ([delegate class] == [GPLaunchViaPushNotificationAppDelegateWrapper class]) {
         return;
     }
     
-    GPLaunchViewPushNotificationAppDelegateWrapper *appDelegateWrapper = [[GPLaunchViewPushNotificationAppDelegateWrapper alloc] init];
+    GPLaunchViaPushNotificationAppDelegateWrapper *appDelegateWrapper = [[GPLaunchViaPushNotificationAppDelegateWrapper alloc] init];
     [appDelegateWrapper setOriginalAppDelegate:delegate];
-    GPLaunchViewPushNotificationAppDelegateIntercepter *appDelegateIntercepter = [[GPLaunchViewPushNotificationAppDelegateIntercepter alloc] init];
+    GPLaunchViaPushNotificationAppDelegateIntercepter *appDelegateIntercepter = [[GPLaunchViaPushNotificationAppDelegateIntercepter alloc] init];
     [appDelegateWrapper setDelegate:appDelegateIntercepter];
     [self setDelegateWithWrapping:appDelegateWrapper];
     
