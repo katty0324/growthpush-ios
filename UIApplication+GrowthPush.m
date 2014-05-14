@@ -103,7 +103,7 @@
     }
     
     if ([delegate respondsToSelector:@selector(didPerformApplication:willFinishLaunchingWithOptions:)]) {
-        returnValue = returnValue && [delegate didPerformApplication:application didFinishLaunchingWithOptions:launchOptions];
+        returnValue = returnValue && [delegate didPerformApplication:application willFinishLaunchingWithOptions:launchOptions];
     }
     
     return returnValue;
