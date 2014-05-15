@@ -15,6 +15,11 @@ That's all. GrowthPush instance will get APNS device token, send it to server, t
 
 You can get furthermore information on [GrowthPush documetations](https://growthpush.com/documents).
 
+## How to track "Launch via push notification xxx"
+
+1. Add UIApplication+GrowthPush.h and UIApplication+GrowthPush.m to your project
+1. Disable ARC for UIApplication+GrowthPush.m by adding "-fno-objc-arc" flag. 
+
 ## Building GrowthPush.framework
 
 [iOS-Universal-Framework](https://github.com/kstenerud/iOS-Universal-Framework) is required.
