@@ -10,6 +10,12 @@
 #import <objc/runtime.h>
 #import <GrowthPush/GrowthPush.h>
 
+@interface EasyGrowthPush ()
+
++ (id)sharedInstance;
+
+@end
+
 @interface GPAppDelegateWrapper : UIResponder <UIApplicationDelegate>
 
 @end
@@ -301,6 +307,7 @@
     if(notificationId == nil)
         return;
     
+    [EasyGrowthPush sharedInstance];
     [EasyGrowthPush trackEvent:[NSString stringWithFormat:@"Launch via push notification %@", notificationId] value:nil];
     
 }
