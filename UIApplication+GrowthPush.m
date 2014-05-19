@@ -301,7 +301,7 @@
     if(notificationId == nil)
         return;
     
-    [GrowthPush trackEvent:[NSString stringWithFormat:@"Launch via push notification %@", notificationId] value:nil];
+    [EasyGrowthPush trackEvent:[NSString stringWithFormat:@"Launch via push notification %@", notificationId] value:nil];
     
 }
 
