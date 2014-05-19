@@ -99,15 +99,15 @@
     BOOL returnValue = YES;
     
     if ([delegate respondsToSelector:@selector(willPerformApplication:willFinishLaunchingWithOptions:)]) {
-        returnValue = returnValue && [delegate willPerformApplication:application willFinishLaunchingWithOptions:launchOptions];
+        returnValue = [delegate willPerformApplication:application willFinishLaunchingWithOptions:launchOptions] && returnValue;
     }
     
     if ([originalAppDelegate respondsToSelector:@selector(application:willFinishLaunchingWithOptions:)]) {
-        returnValue = returnValue && [originalAppDelegate application:application willFinishLaunchingWithOptions:launchOptions];
+        returnValue = [originalAppDelegate application:application willFinishLaunchingWithOptions:launchOptions] && returnValue;
     }
     
     if ([delegate respondsToSelector:@selector(didPerformApplication:willFinishLaunchingWithOptions:)]) {
-        returnValue = returnValue && [delegate didPerformApplication:application willFinishLaunchingWithOptions:launchOptions];
+        returnValue = [delegate didPerformApplication:application willFinishLaunchingWithOptions:launchOptions] && returnValue;
     }
     
     return returnValue;
@@ -119,15 +119,15 @@
     BOOL returnValue = YES;
     
     if ([delegate respondsToSelector:@selector(willPerformApplication:didFinishLaunchingWithOptions:)]) {
-        returnValue = returnValue && [delegate willPerformApplication:application didFinishLaunchingWithOptions:launchOptions];
+        returnValue = [delegate willPerformApplication:application didFinishLaunchingWithOptions:launchOptions] && returnValue;
     }
     
     if ([originalAppDelegate respondsToSelector:@selector(application:didFinishLaunchingWithOptions:)]) {
-        returnValue = returnValue && [originalAppDelegate application:application didFinishLaunchingWithOptions:launchOptions];
+        returnValue = [originalAppDelegate application:application didFinishLaunchingWithOptions:launchOptions] && returnValue;
     }
     
     if ([delegate respondsToSelector:@selector(didPerformApplication:didFinishLaunchingWithOptions:)]) {
-        returnValue = returnValue && [delegate didPerformApplication:application didFinishLaunchingWithOptions:launchOptions];
+        returnValue = [delegate didPerformApplication:application didFinishLaunchingWithOptions:launchOptions] && returnValue;
     }
     
     return returnValue;
